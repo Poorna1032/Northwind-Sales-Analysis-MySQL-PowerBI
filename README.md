@@ -1,57 +1,56 @@
-# Northwind-Sales-Analysis-MySQL-PowerBI
-Comprehensive Sales &amp; Operations EDA for Northwind Traders. Leveraged MySQL (SQL) for data profiling and Power BI (DAX) for dynamic visualization and strategic insights.
+# 📈 Northwind Traders Sales and Operations Analysis
 
-🎯 Project Overview:
-This project executes a comprehensive Exploratory Data Analysis (EDA) of the Northwind Traders historical dataset. The workflow showcases end-to-end data analysis skills, transitioning from raw data querying in MySQL to sophisticated data modeling and interactive business intelligence using Power BI.
+## 🎯 Project Overview
 
- The primary goal was to provide strategic, evidence-based insights across core business pillars: Sales Performance, Customer Behavior, Organizational Structure, and Supply Chain efficiency.
+This project executes a comprehensive **Exploratory Data Analysis (EDA)** of the Northwind Traders historical dataset. The workflow demonstrates end-to-end data analysis skills, transitioning from raw data manipulation using **MySQL (SQL)** to advanced data modeling and interactive business intelligence in **Power BI**.
 
-🛠️ Technology Stack:
-Component	Technology	Purpose in Project
-Data Exploration & Metrics	MySQL (SQL)	Used for initial data profiling, complex multi-table joins, feature engineering, and calculating raw metrics (e.g., Net Revenue, AOV).
-Data Modeling & Logic	Power BI Desktop (DAX)	Used to build a dimensional model (Star Schema), create sophisticated measures (AOV, Tenure), and define hierarchies (PATH function).
-Visualization & Reporting	Power BI Desktop	Created interactive dashboards to translate analytical findings into clear, actionable business insights.
-Version Control	Git / GitHub	For documentation, file management, and transparent version control.
+The primary goal was to move beyond simple reporting to deliver **strategic, evidence-based insights** across core business pillars: Sales, Employee Management, and Supply Chain.
 
-📁 Repository Contents
-File/Folder	Description
-01_SQL_EDA/Northwind Sales Project (EDA SQL Queries).sql	The source of truth for the raw analysis. Contains all 14+ specific SQL queries used for data exploration, cleaning, metric calculation, and anomaly detection.
-02_PowerBI_Visualizations/Northwinds Sales Analysis Project.pbix	The final reporting solution. Contains the completed dimensional model, all DAX measures, and the finalized interactive report pages.
+---
 
-💡 Key Findings & Strategic Insights
-The following insights are a result of transforming the initial SQL queries into final Power BI visualizations:
+## 🛠️ Technical Workflow & Repository Structure
 
-1. Sales & Customer Performance
-Analysis Focus	Power BI Visual Used	Strategic Insight
-Order Value Distribution	Card Visuals (Min, Median, Max)	Comparison of Average vs. Median Order Value revealed a positive skew, confirming that a few extremely large transactions are inflating the mean AOV.
-Customer Risk	Table / Bar Chart (Top Customers)	Identified the Top N customers responsible for the majority of revenue, highlighting significant revenue concentration risk that warrants account prioritization (Pareto Principle).
-Revenue Trend	Line Chart	Confirmed year-over-year growth and established a predictable Q4/Q1 seasonal peak, which should guide inventory and marketing budgets.
+### Technology Stack
 
-2. Employee Structure & Operations
-Analysis Focus	Power BI Visual Used	Key DAX / Modeling Technique
-Reporting Structure	Matrix Visual	Used the PATH and LOOKUPVALUE DAX functions to define the Manager → Subordinate hierarchy and measure the Span of Control.
-Tenure Distribution	Clustered Column Chart	Calculated employee experience using DATEDIFF and grouped the results into 1-year bins to assess workforce stability and turnover risk.
-Span of Control	Matrix Count(EmployeeID)	Confirmed the organization operates with a flat structure due to the wide span of control (high count of direct reports) seen under top managers.
+| Component | Technology | Primary Function |
+| :--- | :--- | :--- |
+| **Data Exploration & Metrics** | **MySQL (SQL)** | Used for initial data profiling, complex multi-table joins, and calculating raw metrics (e.g., Net Revenue, AOV). |
+| **Data Modeling & Logic** | **Power BI Desktop (DAX)** | Used to build a dimensional model (Star Schema), create sophisticated measures, and define dynamic hierarchies. |
+| **Visualization & Reporting** | **Power BI Desktop** | Created interactive dashboards to visually present key findings and support decision-making. |
 
-3. Product & Supply Chain Analysis
-Analysis Focus	Power BI Visual Used	Operational Insight
-Product Pricing	Clustered Column Chart (Histogram)	Grouped product prices into $20 bins to define the core competitive price tier where the majority of inventory is clustered, and identify premium outliers.
-Supplier Risk	Bar/Pie Chart (Product Count)	Identified suppliers responsible for the majority of the product catalogue, confirming supplier concentration risk and dependency on a few key vendors.
-Pricing Volatility	Table (Min/Median/Max Price per Supplier)	Evaluated the price spread (Min to Max) for each supplier to identify partners with high price volatility, informing procurement negotiation strategy.
+### Repository Contents
 
-⚙️ Key Technical Techniques
-The following are examples of specific technical solutions implemented within the project:
+* **`02_SQL_EDA/Northwind Sales Project (EDA SQL Queries).sql`**: Contains **14+ comprehensive SQL queries** used for all initial data exploration, cleaning, and calculating raw metrics before data loading.
+* **`03_PowerBI_Visualizations/Northwinds Sales Analysis Project.pbix`**: The final Power BI file, including the completed data model, all DAX logic, and the interactive dashboard reports.
 
-DAX (Power BI)
-Employee Hierarchy: Creation of the Employee Path column using PATH(EmployeeID, ReportsTo) and subsequent extraction of names using PATHITEM and LOOKUPVALUE.
+### Key DAX & Modeling Techniques
 
-Time Intelligence: Use of DATEDIFF to calculate employee tenure and shipping duration days.
+* **Organizational Hierarchy:** Used the **`PATH` and `LOOKUPVALUE` DAX functions** to dynamically create the Manager $\rightarrow$ Subordinate reporting structure and measure the **Span of Control**.
+* **Pricing Distribution:** Created a **calculated column using the "Bin" feature** to generate a histogram of product pricing (e.g., $20 bins) for market analysis.
+* **Time Intelligence:** Utilized **`DATEDIFF`** to accurately calculate employee tenure and shipping durations.
 
-AOV Measure: DIVIDE([Total Revenue], [Total Orders])
+---
 
-SQL (MySQL/EDA Queries)
-Net Revenue: Calculation of revenue at the line-item level using the formula: SUM(OD.UnitPrice * OD.Quantity * (1 - OD.Discount)).
+## 💡 Key Business Insights
 
-Customer Tiering: Use of Common Table Expressions (CTEs/WITH clause) to calculate the total number of orders per customer, followed by an aggregation to find the Average Orders Per Customer.
+The following are the major strategic insights delivered via the final Power BI dashboard:
 
-Cross-Domain Joins: Complex JOIN operations across Customers, Orders, Order Details, Products, and Suppliers to connect financial metrics with supplier and product dimensions.
+### 1. Sales & Customer Performance
+
+* **Revenue Trend:** Established a clear **Q4/Q1 seasonal peak**, vital for guiding annual budgeting and inventory stock levels.
+* **Customer Risk:** Identified that the **Top 5 customers** account for a disproportionately large share of total revenue, confirming a significant **revenue concentration risk**.
+* **Order Value Skew:** Visual comparison of Average vs. Median Order Value confirmed a **positive skew**, driven by a small number of high-value transactions.
+
+### 2. Employee Structure & Operations
+
+* **Management Span of Control:** The Matrix visual proved the company operates with a **flat organizational structure**, evidenced by the high count of direct reports (wide span of control) under key managers.
+* **Workforce Stability:** Tenure analysis confirmed the concentration of employees in specific experience brackets, allowing management to forecast potential **future turnover risk**.
+
+### 3. Product & Supply Chain Analysis
+
+* **Core Pricing Tier:** Product pricing analysis identified the **core competitive price tier** where the majority of inventory is clustered, guiding competitive pricing strategy.
+* **Demand Prioritization:** Identified the **Top 10 highest-volume products** via the Bar Chart, which is crucial for **inventory prioritization** and minimizing stock-outs.
+* **Procurement Strategy:** Cross-analysis of supplier pricing exposed vendors with high **price volatility**, offering clear targets for contract negotiation.
+
+***
+*Project completed for Data Analysis Portfolio. Licensed under the MIT License.*
